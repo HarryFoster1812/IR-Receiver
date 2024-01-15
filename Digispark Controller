@@ -1,1 +1,31 @@
-//code here
+#include <IRremote.h>
+#include <digikeyboard.h>
+#include <digimouse.h>
+
+int RECV_PIN = 2;
+
+IRrecv irrecv(RECV_PIN);
+decode_results results;
+
+#define UP_KEY;
+
+void translate(int_32 value){
+   
+}
+
+void setup()
+{
+  Serial.begin(9600);
+  Mouse.begin();
+  Keyboard.begin();
+  irrecv.enableIRIn(); // Start the receiver
+}
+
+void loop() {
+  if (irrecv.decode(&results)) {
+    translate(results.value);
+    Serial.println(results.value, HEX);
+    irrecv.resume(); // Receive the next value
+  }
+  delay(100);
+}
